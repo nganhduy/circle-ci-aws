@@ -5,17 +5,6 @@ version: 2.1
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
-  set-credentials: 
-    docker: 
-      - image: amazon/aws-cli
-    steps: 
-      - checkout
-      - run:
-          name: Set Credentials for AWS
-          command: aws configure set aws_access_key_id ${AWS_Access_Key_ID}
-      - run: aws configure set aws_secret_access_key ${AWS_Secret_Access_Key}
-      - run: aws configure set default.region ${AWS_Default_Region}
-      - run: aws configure set aws_session_token ${AWS_Session_Token}
   create-infrastructure: 
     docker: 
       - image: amazon/aws-cli
@@ -32,7 +21,4 @@ workflows:
   create-infrastructure-workflow: 
     jobs: 
       - create-infrastructure: 
-          requires: 
-            - set-credentials
-      - set-credentials
       
