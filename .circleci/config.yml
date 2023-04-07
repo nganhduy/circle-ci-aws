@@ -20,5 +20,5 @@ jobs:
 workflows:
   create-infrastructure-workflow: 
     jobs: 
-      - create-infrastructure: 
-      
+      - create-infrastructure
+    
