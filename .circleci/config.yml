@@ -31,6 +31,8 @@ jobs:
 workflows:
   create-infrastructure-workflow: 
     jobs: 
-      - create-infrastructure:
+      - create-infrastructure: 
           requires: 
             - set-credentials
+      - set-credentials
+      
