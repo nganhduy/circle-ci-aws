@@ -5,6 +5,14 @@ version: 2.1
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
+  aws-cli-cred-setup:
+    executor: aws-cli/default
+    steps:
+      - aws-cli/setup:
+          aws-access-key-id: AWS_ACCESS_KEY
+          aws-secret-access-key: AWS_ACCESS_SECRET
+          aws-session-token: AWS_SESSION_TOKEN
+          aws-region: AWS_REGION_NAME
   create-infrastructure: 
     docker: 
       - image: amazon/aws-cli
@@ -20,5 +28,8 @@ jobs:
 workflows:
   create-infrastructure-workflow: 
     jobs: 
-      - create-infrastructure
+      - create-infrastructure:
+          requires: 
+            - aws-cli-cred-setup
+      - aws-cli-cred-setup
     
